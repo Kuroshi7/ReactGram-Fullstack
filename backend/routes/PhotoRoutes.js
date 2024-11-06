@@ -1,0 +1,27 @@
+const express = require("express");
+const router = express.Router();
+
+//Controller
+const {insertPhoto,deletePhoto,getAllPhotos,getPhotoById,updatePhoto,likePhoto,commentPhoto,searchPhotos,getUserPhotos} = require("../controllers/PhotoController");
+
+//Middleware
+const authGuard = require("../middleware/authGuard");
+const validate = require("../middleware/HandleValidation");
+const{photoIsertValidation,photoUpdateValidation,commentValidation} = require("../middleware/photoValidation");
+const {imageUpload} = require("../middleware/imageUpload");
+
+
+//Routes
+
+router.post("/", authGuard, imageUpload.single("image"),photoIsertValidation(),validate,insertPhoto);
+router.delete("/:id",authGuard, deletePhoto);
+router.get("/user/:id", getUserPhotos);
+router.get("/search", searchPhotos)
+router.get("/:id", getPhotoById);
+router.put("/:id",authGuard,imageUpload.single("image"),photoUpdateValidation(),validate,updatePhoto);
+router.put("/like/:id",authGuard,likePhoto);
+router.put("/comment/:id",authGuard,commentValidation(),validate,commentPhoto);
+
+
+
+module.exports = router;
