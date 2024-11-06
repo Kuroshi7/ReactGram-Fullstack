@@ -15,6 +15,7 @@ const {imageUpload} = require("../middleware/imageUpload");
 
 router.post("/", authGuard, imageUpload.single("image"),photoIsertValidation(),validate,insertPhoto);
 router.delete("/:id",authGuard, deletePhoto);
+router.get("/", authGuard,getAllPhotos)
 router.get("/user/:id", getUserPhotos);
 router.get("/search", searchPhotos)
 router.get("/:id", getPhotoById);

@@ -33,31 +33,45 @@ const insertPhoto = async (req, res) =>{
 
 //remover photo do Banco de dados
 const deletePhoto = async (req, res) =>{
+    //obtendo id da foto da URL
     const {id} = req.params;
+    //obtendo usuario pela requisiçao
     const reqUser = req.user;
+    console.log("Aqui: ", reqUser.name)
+    console.log("ID recebido: ", id);
+  try{
+    //obtendo a foto do model, do BD mongoose pelo id na URL
     const photo = await Photo.findById((id));
+    console.log("Apos findById: ", photo)
 //checar se foto existe
+
     if(!photo){
         res.status(404).json({errors:["Foto não encontrada!"]})
         return;
     }
 
     //checar se foto pertence ao usuario
-
+    //mesmo usuario excluindo deve ser o dono
     if(!photo.userId.equals(reqUser._id)){
         res.status(422).json({errors:["Ocorreu um erro, tente novamente mais tarde"]})
         return;
     }
-
+    //se nao houver erro remove a foto do BD
     await Photo.findByIdAndDelete(photo._id);
     res.status(200).json({id:photo._id, message:"Foto exclúida com sucesso."})
+  } catch (error){
+    res.status(404).json({errors:["Erro Geral."]})
+  } 
+
 };
 
 // GET all photos
 const getAllPhotos = async (req,res) =>{
+    //recuperando todas as fotos
+    //ordenando pelo mais novo
     const photos = await Photo.find({})
     .sort([["createdAt", -1]]).exec();
-
+    //json (photos) carrega as fotos
     return res.status(200).json(photos);
 };
 
