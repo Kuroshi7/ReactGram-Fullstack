@@ -78,16 +78,19 @@ const getAllPhotos = async (req,res) =>{
 //GET user photos
 
 const getUserPhotos = async (req, res) =>{
+    //obter id da URL
     const {id} = req.params;
-
+// filtrar pelo campo userID
+//ordenado pelo mais novo
     const photos = await Photo.find({userId:id}).sort([["createdAt",-1]]).exec();
-
+//retorna 200 com as fotos na saida do Postman
     return res.status(200).json(photos);
 };
 
 //Foto por id
 
 const getPhotoById = async (req, res) =>{
+    //ID vira pela URL chamada no postman
     const {id} = req.params;
 
     const photo = await Photo.findById((id));
@@ -103,41 +106,46 @@ const getPhotoById = async (req, res) =>{
 //atualizar foto
 
 const updatePhoto = async (req, res) =>{
+    //Id vindo do URL
     const {id} = req.params;
+    //Trocar apenas titulo
     const{title} = req.body;
-
-    let image;
-
-    if(req.file){
-        image = req.file.filename;
-    }
-
     const reqUser = req.user;
 
-    const photo = await Photo.findById(id);
+    try{
+        const photo = await Photo.findById(id);
 
-    //checar se foto existe
+        //checar se foto existe
+    
+        if(!photo){
+            res.status(404).json({erros:["Foto não encontrada!"]});
+            return;
+        }
+    
+        //checar se pertence a usuario//valida se foto enviada e do usuario logado
+        if(!photo.userId.equals(reqUser._id)){
+            res.status(422).json({errors:["Ocorreu um erro, usúario não é o dono da foto. Tente novamente mais tarde"]})
+            return;
+        }
+        if(title){
+            photo.title = title;
+        }
+        await photo.save()
+        let image;
+        if(req.file){
+            image = req.file.filename;
+        }
+        if(image){
+            photo.image = image;
+        }
+    
 
-    if(!photo){
-        res.status(404).json({erros:["Foto não encontrada!"]});
+    
+        res.status(200).json({photo, message: "Foto atualizada com sucesso!"});
+    } catch (error){
+        res.status(404).json({errors:["Erro Geral!"]})
         return;
     }
-
-    //checar se pertence a usuario
-    if(!photo.userId.equals(reqUser._id)){
-        res.status(422).json({errors:["Ocorreu um erro, tente novamente mais tarde"]})
-        return;
-    }
-    if(title){
-        photo.title = title;
-    }
-    if(image){
-        photo.image = image;
-    }
-
-    await photo.save()
-
-    res.status(200).json({photo, message: "Foto atualizada com sucesso!"});
 };
 
 //funçao de likes
@@ -174,7 +182,9 @@ const commentPhoto = async (req, res) =>{
     const {id} = req.params;
     const{comment} = req.body;
     const reqUser = req.user;
+    //recuperar dados do usario no BD
     const user = await User.findById(reqUser._id);
+    //recuperar foto comentada
     const photo = await Photo.findById(id);
 
     //checar se foto existe
@@ -205,6 +215,9 @@ const commentPhoto = async (req, res) =>{
 //busca foto por titulo
 const searchPhotos = async (req, res) =>{
     const {q} = req.query;
+    //REGEX
+    //procurar pelo valor q em qualquer lugar da string do titulo
+    //i ignorar case sensitive
     const photos = await Photo.find({title: new RegExp(q,"i")}).exec();
     res.status(200).json(photos);
 }
