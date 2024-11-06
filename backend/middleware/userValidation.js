@@ -40,7 +40,7 @@ const loginValidation = () => {
     ];
 };
 
-const userUpdateValidation =() =>{
+const userUpdateValidation = () =>{
     return [
         body("name")
             .optional()
@@ -52,6 +52,8 @@ const userUpdateValidation =() =>{
             .withMessage("A senha precisa de no mínimo 5 caracteres."),
     ];
 };
+
+
 
 module.exports = {
     userCreateValidation,
