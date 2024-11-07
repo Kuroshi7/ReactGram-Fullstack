@@ -16,15 +16,25 @@ require("./config/db.js")
 app.use(express.json());
 app.use(express.urlencoded({extended:false}));
 
-//Resilvendo Cors, rodar API na porta 5000 e o node WEB na porta 3000
-app.use(cors({credentials:true,origin:"http://127.0.0.1:3000"}))
+
+
+//Resolvendo Cors, rodar API na porta 5000 e o node WEB na porta 3000
+
+const corsOptions = {
+    origin: '*',
+    credentials:true,       //access-control-allow-credentials:true
+    optionSuccessStatus:200,
+}
+app.use(cors(corsOptions))
+//app.use(cors({credentials:true,origin:"http://127.0.0.1:3000"}))
 
 //Diretorio de upload
 app.use("/uploads",
     express.static(path.join(__dirname,"/uploads")));
 
 //Rotas
-const router = require ("./routes/Routes.js")
+const router = require ("./routes/Routes.js");
+const { options } = require("./routes/PhotoRoutes.js");
 
 app.use(router)
 

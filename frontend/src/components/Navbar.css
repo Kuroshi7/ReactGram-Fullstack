@@ -1,0 +1,50 @@
+#nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #000000;
+    border-bottom: 1px solid #dddddd7a;
+    padding: 0.1em 1em;
+  }
+  
+  #search-form {
+    position: relative;
+    width: 20%;
+    margin: 0;
+  }
+  
+  #search-form svg {
+    position: absolute;
+    top: 50%;
+    left: 10px;
+    color: #ccc;
+    transform: translateY(-50%);
+  }
+  
+  #search-form input {
+    padding: 0.5em 1em 0.5em 2.5em;
+    border: none;
+    border-radius: 8px;
+    width: 100%;
+    margin: 0;
+    background-color: #333;
+    color: #fff;
+  }
+  
+  #nav-links {
+    display: flex;
+    align-items: center;
+  }
+  
+  #nav-links li {
+    margin-right: 1em;
+    list-style: none;
+  }
+  
+  #nav-links span {
+    cursor: pointer;
+  }
+  
+  #nav-links svg {
+    font-size: 1.5em;
+  }
