@@ -26,7 +26,7 @@ const Navbar = () => {
         dispatch(logout());
         dispatch(reset());
         navigate("/login");
-    }
+    };
 
     return(
         <nav id="nav">

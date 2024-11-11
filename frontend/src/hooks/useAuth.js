@@ -9,6 +9,7 @@ export const useAuth = () =>{
     const [loading, setLoading] = useState(true);
     //sera ativado sempre que o usuario mudar.
     useEffect(()=>{
+        
         if(user){
             //usuario autenticado
             setAuth(true);
