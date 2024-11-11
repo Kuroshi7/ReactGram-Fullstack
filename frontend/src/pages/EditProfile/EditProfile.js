@@ -44,12 +44,32 @@ const EditProfile = () => {
     const handleSubmit = async (e) =>{
         e.preventDefault()
     };
+
+    //utilizada para exibir imagem preview
+    const handleFile = (e) =>{
+        //recuperar imagem e guardar em variavel
+        const image = e.target.files[0];
+        setPreviewImage(image);
+        //mudar estado da image
+        setProfileImage(image);
+    }
+
     return (
         <div id="edit-profile">
             <h2>Edite seus dados</h2>
             <p className="subtitle">
             Adicione uma imagem de perfil, e conte mais um pouco sobre você...
             </p>
+            {/* executar codigo dinamico, aplicando CSS correto profile-image
+            se o usuario tem uma imagem ea a variavel previewImage esta preenchida entao buscara a imagem no backend */}
+            {(user.profileImage || previewImage) &&(
+                <img
+                className="profile-image"
+                src={previewImage ? URL.createObjectURL(previewImage) : `${uploads}/users/${user.profileImage}`
+                }
+                alt={user.name}
+                />
+            )}
             <form onSubmit={handleSubmit}>
                 <input
                 type="text"
@@ -60,7 +80,7 @@ const EditProfile = () => {
                 <input type="email" placeholder="E-Mail" disabled value={email|| ""}/>
                 <label>
                     <span>Imagem de Perfil:</span>
-                    <input type="file"/>
+                    <input type="file" onChange={handleFile}/>
                 </label>
                 <label>
                     <span>Bio:</span>
