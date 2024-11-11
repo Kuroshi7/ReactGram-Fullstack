@@ -10,11 +10,24 @@ import { useAuth } from "../hooks/useAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
+//Redux
+import {logout,reset} from "../slices/authSlice"
+
 const Navbar = () => {
     //Usar useAuth.js
     const{auth} = useAuth();
     //Usar dados do usuario que esta no useSlice
     const{user} = useSelector((state)=> state.auth);
+
+    const navigate = useNavigate();
+    const  dispatch = useDispatch();
+
+    const handleLogout = () =>{
+        dispatch(logout());
+        dispatch(reset());
+        navigate("/login");
+    }
+
     return(
         <nav id="nav">
             <Link to = "/">
@@ -27,7 +40,7 @@ const Navbar = () => {
             <ul id="nav-links">
                 {/*Links para autenticado */}
                 {console.log("Estado do auth: ", auth)}
-                {!auth? (
+                {auth? (
                     <>
                         <li>
                             <NavLink to="/">
@@ -47,7 +60,7 @@ const Navbar = () => {
                             </NavLink>
                         </li>
                         <li>
-                            <span>Sair</span>
+                            <span onClick={handleLogout}>Sair</span>
                         </li>
                     </>
                 ):(
