@@ -27,7 +27,7 @@ const EditProfile = () => {
     useEffect(()=>{
         dispatch(profile());
     }, [dispatch])
-    console.log("EditProfile.js - dados do usuario: ", user)
+    
     
     //Efetivamente preenche o formulario. sempre que houver mudança do usuario.
     useEffect(()=>{
@@ -39,11 +39,36 @@ const EditProfile = () => {
             setBio(user.bio);
         }
     }, [user])
-
+    console.log("EditProfile.js - dados do usuario: ", user)
 
     const handleSubmit = async (e) =>{
         e.preventDefault()
+        //Coletar user data dos estados
+        const userData = {
+            name,
+        };
+        if(profileImage){
+            userData.profileImage = profileImage;
+        }
+        if(bio){
+            userData.bio = bio;
+        }
+        if(password){
+            userData.password = password;
+        }
+
+        //construir o form data.
+        const formData = new FormData();//novo objeto
+        //looping em todas as chaves enviadas, senha,nome , 4 itens com imagem e bio
+        const userFormData = Object.keys(userData).forEach((key)=> formData.append(key, userData[key])
+    );
+    formData.append("user", userFormData);
+    await dispatch(updateProfile(formData));
+    setTimeout(()=>{
+        dispatch(resetMessage());
+    }, 2000);
     };
+    
 
     //utilizada para exibir imagem preview
     const handleFile = (e) =>{
@@ -99,6 +124,10 @@ const EditProfile = () => {
                     value={password||""} 
                     />
                 </label>
+                {!loading && <input type="submit" value="Atualizar"/>}
+                {loading && <input type="submit" disabled value="Aguarde..."/>}
+                {error && <Message msg={error} type="error"/>}
+                {message && <Message msg={message} type="success"/>}
             </form>
         </div>
         );

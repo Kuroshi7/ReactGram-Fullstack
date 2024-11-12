@@ -21,7 +21,23 @@ const profile = async (data, token) =>{
         }
     };
 
+    //update user details
+    //funçao assincrona que espera os dados para atualizaçao e o token para autenticaçao
+    const updateProfile = async (data, token) =>{
+        //verbo PUT para atualizar na API.
+        const config = requestConfig("PUT",data,token,true);
+        try{
+            const res = await fetch (api + "/users/", config)
+            .then((res)=> res.json())
+            .catch((err)=>err);
+            return res;
+        }catch (error){
+            console.log(error)
+        }
+    };
+
     const userService ={
-        profile
+        profile,
+        updateProfile
     }
 export default userService
