@@ -14,7 +14,7 @@ import { useParams } from "react-router-dom"
 
 //redux
 import { getUserDetails } from "../../slices/userSlice"
-import {getUserPhotos, publishPhoto, resetMessage } from "../../slices/photoSlice"
+import {getUserPhotos, publishPhoto, resetMessage, deletePhoto } from "../../slices/photoSlice"
 
 const Profile =() =>{
     const {id} = useParams()
@@ -86,11 +86,11 @@ const submitHandle = (e) =>{
 
 
     //excluir image
-/* const handleDelete = (id)=>{
+ const handleDelete = (id)=>{
     dispatch(deletePhoto(id))
     
     resetComponentMessage();
-    } */
+    } 
 
     //mostrar/esconder forms
     function hideOrShowForms(){
@@ -212,13 +212,13 @@ const submitHandle = (e) =>{
                             </Link>
                             <BsPencilFill onClick={() => handleEdit(photo)} />
                             {/* A Arrow function dispara o evento. */}
-                            {/*<BsXLg onClick={() => handleDelete(photo._id)} />*/} 
+                            {<BsXLg onClick={() => handleDelete(photo._id)} />} 
                           </div>
                         ) : (
                           <Link className="btn" to={`/photos/${photo._id}`}>
                             Ver
                           </Link>
-                       )}
+                      )}
                     </div>
                 ))}
                 {photosArray.length === 0 && <p>Ainda não há fotos publicadas...</p>}
