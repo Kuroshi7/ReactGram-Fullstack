@@ -14,7 +14,7 @@ import { useParams } from "react-router-dom"
 
 //redux
 import { getUserDetails } from "../../slices/userSlice"
-import {getUserPhotos, publishPhoto, resetMessage, deletePhoto } from "../../slices/photoSlice"
+import {getUserPhotos, publishPhoto, resetMessage, deletePhoto, updatePhoto } from "../../slices/photoSlice"
 
 const Profile =() =>{
     const {id} = useParams()
@@ -68,15 +68,14 @@ const submitHandle = (e) =>{
 
     //build form data
     const formData = new FormData();
-
-    const photoFormData = Object.keys(photoData).forEach((key)=> formData.append(key, photoData[key])
+    const photoFormData = Object.keys(photoData).forEach((key) =>
+      formData.append(key, photoData[key])
     );
     formData.append("photo", photoFormData);
-
     dispatch(publishPhoto(formData));
-    setTitle("")
+    setTitle("");
     resetComponentMessage();
-};
+  };
 
     //mudar estado da image
     const handleFile = (e)=>{
@@ -114,16 +113,14 @@ const submitHandle = (e) =>{
     }
 
     //update titulo da foto
-    const handleUpdate = (e) =>{
-        e.preventDefault();
-
-        const photoData = {
-            title: editTitle,
-            id: editId,
-        };
-
-        //dispatch(updatePhoto(photoData));
-        //resetComponentMessage()
+    const handleUpdate = (e) => {
+      e.preventDefault();
+      const photoData = {
+        title: editTitle,
+        id: editId,
+      };
+      dispatch(updatePhoto(photoData));
+      resetComponentMessage();
     };
 
     if(loading){
@@ -179,6 +176,7 @@ const submitHandle = (e) =>{
                     onChange={(e) => setEditTitle(e.target.value)}
                     value={editTitle || ""}
                   />
+                  
                   <input type="submit" value="Atualizar" />
                   <button className="cancel-btn" onClick={handleCancelEdit}>
                     Cancelar edição
