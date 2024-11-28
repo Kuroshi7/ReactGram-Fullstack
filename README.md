@@ -15,6 +15,7 @@ Frontend:
 🛠️ Redux Toolkit
 🌐 React Router
 🎨 CSS
+
 Backend:
 
 🟢 Node.js com Express
