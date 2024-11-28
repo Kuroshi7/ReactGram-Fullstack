@@ -1,4 +1,5 @@
-PicNest
+**PicNest**
+
 PicNest é uma aplicação full stack para compartilhamento de fotos, desenvolvida com foco em gerenciamento de usuários, autenticação segura e uma experiência interativa para os usuários. O projeto utiliza tecnologias modernas e segue boas práticas para escalabilidade.
 
 Funcionalidades
