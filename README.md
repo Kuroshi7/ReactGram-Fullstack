@@ -31,7 +31,8 @@ Backend:
 📂 MongoDB com Mongoose
 🔒 JWT e Bcrypt para segurança
 ✅ Express-Validator para validação de dados
-Configuração do Projeto
+
+**Configuração do Projeto:**
 
 **Clone o repositório**:
  ```bash
