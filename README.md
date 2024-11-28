@@ -16,7 +16,7 @@ Mensagens de sucesso e erro exibidas dinamicamente.
 
 Backend estruturado no padrão MVC com validação de dados e segurança.
 
-Tecnologias Utilizadas
+**Tecnologias Utilizadas:**
 
 Frontend:
 
