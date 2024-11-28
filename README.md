@@ -36,7 +36,7 @@ Backend:
 
 **Clone o repositório**:
  ```bash
-git clone https://github.com/seu_usuario/PicNest.git
+git clone https://github.com/Kuroshi7/ReactGram-Fullstack
 ```
 
 **Entre na pasta do backend:**
