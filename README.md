@@ -93,6 +93,7 @@ Cadastro e Login: Crie sua conta e autentique-se para acessar funcionalidades ex
 Perfil: Faça upload de fotos, edite seu perfil e visualize suas publicações.
 
 Planejamento Futuro:
+
 Implementar funcionalidade de "dislike" para fotos.
 
 Adicionar animações e transições mais ricas.
