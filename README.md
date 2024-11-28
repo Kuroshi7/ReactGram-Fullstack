@@ -87,12 +87,16 @@ Endpoints do backend: http://localhost:5000
 Recursos:
 
 Página Inicial: Navegue pelas fotos publicadas e interaja com os perfis de outros usuários.
+
 Cadastro e Login: Crie sua conta e autentique-se para acessar funcionalidades exclusivas.
+
 Perfil: Faça upload de fotos, edite seu perfil e visualize suas publicações.
 
 Planejamento Futuro:
 Implementar funcionalidade de "dislike" para fotos.
+
 Adicionar animações e transições mais ricas.
+
 Criar notificações para interações entre usuários.
 
 
