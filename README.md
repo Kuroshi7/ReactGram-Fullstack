@@ -29,21 +29,21 @@ Configuração do Projeto
 git clone https://github.com/seu_usuario/PicNest.git
 ```
 
-Entre na pasta do backend:
+**Entre na pasta do backend:**
 
 
  ```bash
 cd PicNest/backend
 ```
 
-Instale as dependências:
+**Instale as dependências:**
 
  ```bash
 
 npm install
 
 ```
-Crie um arquivo .env com as variáveis de ambiente necessárias:
+**Crie um arquivo .env com as variáveis de ambiente necessárias:**
 
  ```bash
 
@@ -52,30 +52,33 @@ DB_USER=seu_usuario
 DB_PASS=sua_senha
 JWT_SECRET=sua_chave_secreta
 ```
-Inicie o servidor backend:
+
+**Inicie o servidor backend:**
 
  ```bash
 
 npm run server
 ```
-Configure o frontend:
+**Configure o frontend:**
 
-Navegue até a pasta frontend:
+**Navegue até a pasta frontend:**
  ```bash
 cd ../frontend
 ```
 
-Instale as dependências:
+**Instale as dependências:**
  ```bash
 
 npm install
 ```
-Inicie o servidor frontend:
+
+**Inicie o servidor frontend:**
  ```bash
 
 npm start
 ```
-Utilização do Projeto:
+
+**Utilização do Projeto:**
 
 Acesse o frontend: http://localhost:3000
 Endpoints do backend: http://localhost:5000
