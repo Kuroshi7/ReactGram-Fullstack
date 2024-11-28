@@ -1,45 +1,48 @@
 PicNest
-🚀 Projeto Full Stack de Compartilhamento de Fotos
-PicNest é uma aplicação full stack desenvolvida com foco em gerenciamento de usuários, autenticação segura e compartilhamento de fotos. Este projeto utiliza tecnologias modernas e segue boas práticas, proporcionando uma experiência interativa e escalável.
+PicNest é uma aplicação full stack para compartilhamento de fotos, desenvolvida com foco em gerenciamento de usuários, autenticação segura e uma experiência interativa para os usuários. O projeto utiliza tecnologias modernas e segue boas práticas para escalabilidade.
 
-🛠️ Tecnologias Utilizadas
-Frontend
-⚛️ React: Componentização e interface de usuário.
-🛠️ Redux Toolkit: Gerenciamento de estado global.
-🌐 React Router: Navegação entre páginas.
-🎨 CSS: Estilização e responsividade.
-Backend
-🟢 Node.js: Servidor backend.
-⚡ Express: Framework para criação de APIs RESTful.
-📂 MongoDB: Banco de dados NoSQL.
-📘 Mongoose: ODM para modelagem de dados no MongoDB.
-🔒 JWT: Autenticação segura.
-🔑 Bcrypt: Hash de senhas para segurança.
-✅ Express-Validator: Validação de dados.
-🌟 Funcionalidades
-Frontend
+Funcionalidades
 Cadastro e login de usuários com autenticação JWT.
-Upload de fotos com pré-visualização.
-Adição de comentários e visualização de fotos publicadas.
-Gerenciamento de perfil: atualização de nome, bio e imagem de perfil.
-Mensagens claras de erro e sucesso exibidas ao usuário.
-Backend
-Rotas protegidas com autenticação JWT.
-CRUD completo para usuários e fotos.
-Validação de dados no backend.
-Upload de imagens com armazenamento local.
-🖥️ Como Rodar o Projeto
-Pré-requisitos
-Node.js instalado.
-MongoDB configurado e em execução.
-Gerenciador de pacotes (npm ou yarn).
-Passo 1: Configuração do Backend
-Navegue até a pasta backend.
+Upload de fotos com pré-visualização e título.
+Visualização e gerenciamento de fotos publicadas.
+Atualização de perfil: nome, bio e imagem de perfil.
+Mensagens de sucesso e erro exibidas dinamicamente.
+Backend estruturado no padrão MVC com validação de dados e segurança.
+Tecnologias Utilizadas
+Frontend:
+
+⚛️ React
+🛠️ Redux Toolkit
+🌐 React Router
+🎨 CSS
+Backend:
+
+🟢 Node.js com Express
+📂 MongoDB com Mongoose
+🔒 JWT e Bcrypt para segurança
+✅ Express-Validator para validação de dados
+Configuração do Projeto
+
+**Clone o repositório**:
+ ```bash
+git clone https://github.com/seu_usuario/PicNest.git
+```
+Entre na pasta do backend:
+
+
+ ```bash
+cd PicNest/backend
+```
+
 Instale as dependências:
-bash
-Copy code
+
+ ```bash
+
 npm install
-Crie um arquivo .env na raiz da pasta backend e configure as variáveis de ambiente:
+
+```
+Crie um arquivo .env com as variáveis de ambiente necessárias:
+
 makefile
 Copy code
 PORT=5000
@@ -47,16 +50,21 @@ DB_USER=seu_usuario
 DB_PASS=sua_senha
 JWT_SECRET=sua_chave_secreta
 Inicie o servidor backend:
+
 bash
 Copy code
 npm start
-Passo 2: Configuração do Frontend
-Navegue até a pasta frontend.
+Configure o frontend:
+
+Navegue até a pasta frontend:
+bash
+Copy code
+cd ../frontend
 Instale as dependências:
 bash
 Copy code
 npm install
-Crie um arquivo .env na raiz da pasta frontend e configure a variável de ambiente:
+Crie um arquivo .env com a seguinte variável:
 bash
 Copy code
 REACT_APP_API_URL=http://localhost:5000/api
@@ -64,24 +72,16 @@ Inicie o servidor frontend:
 bash
 Copy code
 npm start
-Passo 3: Testar a Aplicação
-Acesse o frontend em: http://localhost:3000.
-O backend estará rodando em: http://localhost:5000.
-🚀 Funcionalidades Planejadas
-Adicionar funcionalidade de "dislike" para postagens.
-Melhorar animações e transições visuais com CSS avançado.
-Implementar sistema de notificações interativas.
-Aprimorar otimização e responsividade.
-📝 Aprendizados
-Durante o desenvolvimento deste projeto, obtive experiência prática em:
+Utilização do Projeto
+Acesse o frontend: http://localhost:3000
+Endpoints do backend: http://localhost:5000
+Recursos:
+Página Inicial: Navegue pelas fotos publicadas e interaja com os perfis de outros usuários.
+Cadastro e Login: Crie sua conta e autentique-se para acessar funcionalidades exclusivas.
+Perfil: Faça upload de fotos, edite seu perfil e visualize suas publicações.
+Planejamento Futuro
+Implementar funcionalidade de "dislike" para fotos.
+Adicionar animações e transições mais ricas.
+Criar notificações para interações entre usuários.
 
-Estruturar projetos utilizando o padrão MVC.
-Configurar e utilizar Redux Toolkit para gerenciar estados e operações assíncronas.
-Integrar frontend e backend com APIs RESTful.
-Implementar autenticação e segurança com JWT.
-Manipular arquivos e configurar upload de imagens no backend.
-Tratar erros e exibir mensagens claras para o usuário no frontend.
-📷 Capturas de Tela
-Página Inicial	Página de Login	Página de Perfil
-Adicione imagens aqui	Adicione imagens aqui	Adicione imagens aqui
 
