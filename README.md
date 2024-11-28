@@ -2,14 +2,22 @@
 
 PicNest é uma aplicação full stack para compartilhamento de fotos, desenvolvida com foco em gerenciamento de usuários, autenticação segura e uma experiência interativa para os usuários. O projeto utiliza tecnologias modernas e segue boas práticas para escalabilidade.
 
-Funcionalidades
+**Funcionalidades:**
+
 Cadastro e login de usuários com autenticação JWT.
+
 Upload de fotos com pré-visualização e título.
+
 Visualização e gerenciamento de fotos publicadas.
+
 Atualização de perfil: nome, bio e imagem de perfil.
+
 Mensagens de sucesso e erro exibidas dinamicamente.
+
 Backend estruturado no padrão MVC com validação de dados e segurança.
+
 Tecnologias Utilizadas
+
 Frontend:
 
 ⚛️ React
