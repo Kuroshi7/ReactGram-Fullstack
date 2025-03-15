@@ -58,9 +58,9 @@ npm install
  ```bash
 
 PORT = 5000
-DB_USER = victorsoffi
-DB_PASS = l1tJbeCM9zwMijkQ
-JWT_SECRET = 1234567890secret
+DB_USER = !!!!!!!!!!!!
+DB_PASS = !!!!!!!!!!
+JWT_SECRET = !!!!!!!!!!!
 ```
 
 **Inicie o servidor backend:**
