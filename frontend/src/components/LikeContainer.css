@@ -1,15 +1,19 @@
-.photo-item img{
-    width: 100%;
+.like {
+  display: flex;
+  align-items: center;
+  border-top: 1px solid #363636;
+  border-bottom: 1px solid #363636;
 }
 
-#home .photo-item h2{
-    margin-bottom: 0.2em;
+#home .like {
+  border: none;
 }
 
-.photo-author{
-    text-align: left;
+.like svg {
+  font-size: 1.5em;
+  cursor: pointer;
 }
 
-.photo-author a{
-    font-weight: bold;
+.like p {
+  margin-left: 1em;
 }

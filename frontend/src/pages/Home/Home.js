@@ -25,7 +25,7 @@ const Home = () => {
   const { photos, loading } = useSelector((state) => state.photo);
 
   // Load all photos
-
+  
   useEffect(() => {
     dispatch(getPhotos());
   }, [dispatch]);
@@ -41,22 +41,22 @@ const Home = () => {
   }
   return (
     <div id="home">
-
-      {photos && photos.map((photo) => (<div key={photo._id}>
-        <PhotoItem photo={photo} />
-        <LikeContainer photo={photo} user={user} handleLike={handleLike} />
-        <Link className="btn" to={`/photos/${photo._id}`}>
-          Ver mais
-        </Link>
-      </div>
-      ))}
+ 
+      {photos && photos.map((photo) => ( <div key={photo._id}>
+            <PhotoItem photo={photo} />
+            <LikeContainer photo={photo} user={user} handleLike={handleLike} />
+            <Link className="btn" to={`/photos/${photo._id}`}>
+              Ver mais
+            </Link>
+          </div>
+        ))}
       {photos && photos.length === 0 && (
         <h2 className="no-photos">
           Ainda não há fotos publicadas,{" "}
           <Link to={`/users/${user._id}`}>clique aqui</Link> para começar.
         </h2>
       )}
-
+       
     </div>
   );
 };

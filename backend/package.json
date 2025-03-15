@@ -1,27 +1,34 @@
 {
+  "homepage": "https://douglasrm87.github.io/backend",
   "name": "backend",
   "version": "1.0.0",
+  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "server": "nodemon ./app.js"
+    "server": "nodemon ./app.js",
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "description": "",
   "dependencies": {
+    "@actions/core": "^1.10.1",
+    "@actions/github": "^6.0.0",
     "bcryptjs": "^2.4.3",
     "cors": "^2.8.5",
-    "dotenv": "^16.4.5",
-    "express": "^4.21.1",
-    "express-validator": "^7.2.0",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-validator": "^7.0.1",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.8.0",
+    "mongodb": "^6.2.0",
+    "mongoose": "^8.0.0",
     "multer": "^1.4.5-lts.1",
     "save-dev": "^0.0.1-security"
   },
   "devDependencies": {
-    "nodemon": "^3.1.7"
+    "gh-pages": "^6.1.1",
+    "nodemon": "^3.0.1"
   }
 }

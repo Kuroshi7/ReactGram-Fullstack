@@ -1,57 +1,72 @@
-import React from 'react'
-import"./Auth.css"
-import { Link } from 'react-router-dom'
-import Message from '../../components/Message';
+import "./Auth.css";
+// Components
+import { Link } from "react-router-dom";
+import Message from "../../components/Message";
 
-import {useState,useEffect} from "react";
+// Hooks
+import { useState, useEffect } from "react";
 
-import {useSelector, useDispatch} from "react-redux";
-import { register, reset } from '../../slices/authSlice';
+//Novos
+import { useSelector, useDispatch } from "react-redux";
+// Redux
+import { register, reset } from "../../slices/authSlice";
+
 
 const Register = () => {
-    const[name, setName] = useState("")
-    const[email, setEmail] = useState("")
-    const[password, setPassword] = useState("")
-    const[confirmPassword, setConfirmPassword] = useState("")
 
-    const dispatch = useDispatch()
-    const {loading, error} = useSelector((state)=>state.auth);
+  const [name, setName] = useState("");
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
+ 
+  //Novos
+  const dispatch = useDispatch();
+  const { loading, error } = useSelector((state) => state.auth);
 
-    const handleSubmit = (e) =>{
-        e.preventDefault();
-        const user ={
-            name,
-            email,
-            password,
-            confirmPassword,
-        }
-        console.log("Dados do usúario: ", user)
-        dispatch(register(user))
-        console.log("Depois dispatch register.js")
+
+  const handleSubmit = (e) => {
+    console.log("Botão pressionado.  register.js");
+    e.preventDefault();
+    const user = {
+      name,
+      email,
+      password,
+      confirmPassword,
     };
-    useEffect(()=>{
-        dispatch(reset())
-    }, [dispatch]);
+    console.log(" register.js Dados do usuário: ",user);
+    // Novos
+    dispatch(register(user));
+    console.log("Depois dispatch register.js")
+  };
+  // Novos - Para toda nova requisição zeramos os dados em novo login e os erros.
+  // Clean all auth states
+  useEffect(() => {
+    dispatch(reset());
+  }, [dispatch]);
 
   return (
     <div id="register">
-        <h2>PicNest Register</h2>
-        <p className="subtitle"> Cadastre-se para ver as fotos dos seus amigos.</p>
-        <form onSubmit={handleSubmit}>
-            <input type='text' placeholder='Nome' onChange={(e) => setName(e.target.value)} value={name}/>
-            <input type='email' placeholder='E-mail' onChange={(e)=> setEmail(e.target.value)} value={email}/>
-            <input type='password' placeholder='Senha' onChange={(e)=> setPassword(e.target.value)} value={password}/>
-            <input type='password' placeholder='Confirme a senha' onChange={(e)=> setConfirmPassword(e.target.value)}value={confirmPassword}/>
-            {!loading && <input type='submit' value='Cadastrar'/>}
-            {loading &&<input type='submit' disabled value="Aguarde..."/>}
-            {error &&<Message msg={error} type="error"/>}
-        </form>
-        <p>
-            já tem uma conta? <Link to="/login">Clique aqui</Link>
-        </p>
+      <h2> PicNest </h2>
+      <p className="subtitle">Cadastre-se para ver as fotos dos seus amigos.</p>
+      <form onSubmit={handleSubmit}> 
+        <input type="text" placeholder="Nome" onChange={(e) => setName(e.target.value)}
+          value={name}/>
+        <input type="email" placeholder="E-mail" onChange={(e) => setEmail(e.target.value)}
+          value={email}/>
+        <input type="password" placeholder="Senha" onChange={(e) => setPassword(e.target.value)}
+          value={password}/>
+        <input type="password" placeholder="Confirme a senha" onChange={(e) => setConfirmPassword(e.target.value)}
+          value={confirmPassword}/>
+        
+        {!loading && <input type="submit" value="Cadastrar" />}
+        {loading && <input type="submit" disabled value="Aguarde..." />}
+        {error && <Message msg={error} type="error" />}
+      
+      </form>
+      <p>
+        Já tem conta? <Link to="/login">Clique aqui</Link>
+      </p>
     </div>
-    
   )
 }
-
 export default Register

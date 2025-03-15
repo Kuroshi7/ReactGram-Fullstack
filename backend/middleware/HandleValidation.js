@@ -1,18 +1,17 @@
-const {validationResult} = require ("express-validator")
+const { validationResult } = require("express-validator");
 
-const validate = (req,res,next)=>{
+const validate = (req, res, next) => {
+    //const errors = validationResult(req);
     const errors = validationResult(req);
-    if(errors.isEmpty()){
+    if (errors.isEmpty()) {
         return next();
     }
     const extractErrors = [];
-
-    //Cada erro chamado de err e usados para enviar ao front
-
-    errors.array().map((err)=> extractErrors.push(err.msg));
-    return res.status (422).json({
+    // Cada erro é chamado de err e usaremos para enviar ao frontend.
+    errors.array().map((err) => extractErrors.push(err.msg));
+    return res.status (422).json ({
         errors: extractErrors,
     });
 };
-
 module.exports = validate;
+

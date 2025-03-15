@@ -1,30 +1,35 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import photoService from "../services/photoService";
 
-
-
-
 const initialState = {
   photosArray: [],
   photo: {},
   error: false,
+  success: false,
   loading: false,
   message: null,
-}
+};
+// Publish an user's photo
+export const publishPhoto = createAsyncThunk(
+  "photo/publish",
+  async (photo, thunkAPI) => {
+    const token = thunkAPI.getState().auth.user.token;
+    console.log ("oi")
+    console.log ("oi")
+    console.log ("oi")
+    console.log ("oi")
+    
+    const data = await photoService.publishPhoto(photo, token);
 
-//Publicar foto do usuario
-export const publishPhoto = createAsyncThunk("photo/publish", async (photo, thunkAPI) => {
-  const token = thunkAPI.getState().auth.user.token;
-  const data = await photoService.publishPhoto(photo, token);
-  console.log(data.errors);
-  //checando erros
-  if (data.errors) {
-    return thunkAPI.rejectWithValue(data.errors[0]);
+    console.log(data.errors);
+    // Check for errors
+    if (data.errors) {
+      return thunkAPI.rejectWithValue(data.errors[0]);
+    }
+
+    return data;
   }
-  return data;
-}
-)
-
+);
 export const photoSlice = createSlice({
   name: "publish",
   initialState,
@@ -33,7 +38,8 @@ export const photoSlice = createSlice({
       state.message = null;
     },
   },
-
+  
+  
   extraReducers: (builder) => {
     builder
       .addCase(publishPhoto.pending, (state) => {
@@ -63,6 +69,18 @@ export const photoSlice = createSlice({
         state.success = true;
         state.error = null;
         state.photosArray = action.payload;
+      })
+      .addCase(getPhotos.pending, (state) => {
+        state.loading = true;
+        state.error = false;
+      })
+      .addCase(getPhotos.fulfilled, (state, action) => {
+        console.log(action.payload);
+        state.loading = false;
+        state.success = true;
+        state.error = null;
+        // Aqui é que faz as fotos irem para a tela da Home.
+        state.photos = action.payload;
       })
       .addCase(deletePhoto.pending, (state) => {
         state.loading = true;
@@ -106,12 +124,13 @@ export const photoSlice = createSlice({
         state.error = action.payload;
         state.photo = null;
       })
+
       .addCase(getPhoto.pending, (state) => {
         state.loading = true;
         state.error = null;
       })
       .addCase(getPhoto.fulfilled, (state, action) => {
-        console.log(action.payload)
+        console.log(action.payload);
         state.loading = false;
         state.success = true;
         state.error = null;
@@ -139,7 +158,7 @@ export const photoSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-
+             
       .addCase(comment.fulfilled, (state, action) => {
         state.loading = false;
         state.success = true;
@@ -153,7 +172,7 @@ export const photoSlice = createSlice({
         state.loading = false;
         state.error = action.payload;
       })
-
+      
       .addCase(searchPhotos.pending, (state) => {
         state.loading = true;
         state.error = false;
@@ -165,19 +184,32 @@ export const photoSlice = createSlice({
         state.error = null;
         state.photos = action.payload;
       });
+     
   },
 });
 
-//get user photos
-export const getUserPhotos = createAsyncThunk("photo/userphotos", async (id, thunkAPI) => {
-  const token = thunkAPI.getState().auth.user.token;
-  const data = await photoService.getUserPhotos(id, token);
-  console.log(data);
-  console.log(data.errors);
-  return data;
-}
+// Get user photos
+export const getUserPhotos = createAsyncThunk(
+  "photo/userphotos",
+  async (id, thunkAPI) => {
+    const token = thunkAPI.getState().auth.user.token;
+    const data = await photoService.getUserPhotos(id, token);
+    console.log(data);
+    console.log(data.errors);
+    return data;
+  }
 );
-//Deletar fotos
+// Get all photos
+// Na função async, o primeiro parametro sempre são os dados e o segundo o thunkAPI.
+// Por isto utilizar o _, pois não teremos dados neste momento apenas as fotos.
+export const getPhotos = createAsyncThunk("photo/getall", async (_,thunkAPI) => {
+  const token = thunkAPI.getState().auth.user.token;
+  console.log ("em photoSlice.js")
+  const data = await photoService.getPhotos(token);
+  
+  return data;
+});
+// Delete a photo
 export const deletePhoto = createAsyncThunk(
   "photo/delete",
   async (id, thunkAPI) => {
@@ -193,8 +225,7 @@ export const deletePhoto = createAsyncThunk(
     return data;
   }
 );
-
-//atualizar foto
+// Update a photo
 export const updatePhoto = createAsyncThunk(
   "photo/update",
   async (photoData, thunkAPI) => {
@@ -214,38 +245,27 @@ export const updatePhoto = createAsyncThunk(
   }
 );
 
-
-//get all photos
-
-export const getPhotos = createAsyncThunk("photo/getall", async (_, thunkAPI) => {
-  const token = thunkAPI.getState().auth.user.token;
-  console.log("em photoSlice.js")
-  const data = await photoService.getPhotos(token);
-
-  return data
-});
-
-//get Photo
+// Get photo
 export const getPhoto = createAsyncThunk("photo/getphoto", async (id, thunkAPI) => {
   const token = thunkAPI.getState().auth.user.token;
-  const data = await photoService.getPhoto(id, token);
+  const data = await photoService.getPhoto(id,token);
 
-  return data
+  return data;
 });
 
-//like
+// Like a photo
 export const like = createAsyncThunk("photo/like", async (id, thunkAPI) => {
   const token = thunkAPI.getState().auth.user.token;
 
   const data = await photoService.like(id, token);
 
-  //checando erros
+  // Check for errors - like em foto que não existe.
   if (data.errors) {
     return thunkAPI.rejectWithValue(data.errors[0]);
   }
 
   return data;
-})
+});
 
 // Add comment to a photo
 export const comment = createAsyncThunk(
@@ -268,7 +288,6 @@ export const comment = createAsyncThunk(
   }
 );
 
-//search
 // Search photos by title
 export const searchPhotos = createAsyncThunk(
   "photo/search",
@@ -280,7 +299,6 @@ export const searchPhotos = createAsyncThunk(
     return data;
   }
 );
-
-
+ 
 export const { resetMessage } = photoSlice.actions;
-export default photoSlice.reducer
+export default photoSlice.reducer;

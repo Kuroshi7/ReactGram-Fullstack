@@ -1,11 +1,11 @@
-import "./Message.css"
+import "./Message.css";
 
-const Message = ({msg, type}) => {
+const Message = ({ msg, type }) => {
   return (
     <div className={`message ${type}`}>
       <p>{msg}</p>
     </div>
-  )
-}
+  );
+};
 
-export default Message
+export default Message;
